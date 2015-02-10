@@ -74,13 +74,13 @@ namespace HotDocs.Sdk
 		PlainText
 	}
 
-	/// <summary>
+    /// <summary>
 	/// This class represents a template that is managed by the host application, and
 	/// (optionally) some assembly parameters (as specified by switches) for that template.
 	/// The location of the template is defined by Template.Location.
 	/// </summary>
-	public class Template
-	{
+	public class Template : ITemplate
+    {
 		private string _title = null;//A cached title when non-null.
 
 		//Constructors
@@ -136,7 +136,7 @@ namespace HotDocs.Sdk
 		/// </summary>
 		/// <param name="locator">A locator string provided by CreateLocator.</param>
 		/// <returns></returns>
-		public static Template Locate(string locator)
+		public static ITemplate Locate(string locator)
 		{
 			if (string.IsNullOrEmpty(locator))
 				throw new ArgumentNullException("locator");
@@ -324,7 +324,7 @@ namespace HotDocs.Sdk
 		/// <param name="docType">The document type to find an extension for.</param>
 		/// <param name="template">The template to to derive an extension from if docType is DocumentType.Native.</param>
 		/// <returns></returns>
-		public static string GetDocExtension(DocumentType docType, Template template)
+		public static string GetDocExtension(DocumentType docType, ITemplate template)
 		{
 			string ext = "";
 			switch (docType)

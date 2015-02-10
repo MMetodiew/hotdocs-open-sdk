@@ -17,7 +17,7 @@ namespace HotDocs.Sdk.Server
 	public class Document : IDisposable
 	{
 		// internal constructor
-		internal Document(Template source, Stream document, DocumentType docType, NamedStream[] supportingFiles, string[] unansweredVariables)
+		internal Document(ITemplate source, Stream document, DocumentType docType, NamedStream[] supportingFiles, string[] unansweredVariables)
 		{
 			if (docType == DocumentType.Native)
 				throw new InvalidOperationException("DocumentResults and AssemblyResults must specify a DocumentType (if known).");
@@ -101,7 +101,7 @@ namespace HotDocs.Sdk.Server
 		/// <summary>
 		/// Retrieve the Template object representing the template the document was assembled from.
 		/// </summary>
-		public Template Source
+		public ITemplate Source
 		{
 			get
 			{
@@ -159,7 +159,7 @@ namespace HotDocs.Sdk.Server
 		}
 
 		private bool disposed = false; // to detect redundant calls
-		private Template _source = null;
+		private ITemplate _source = null;
 
 		/// <summary>
 		/// Calls IDisposable.Dispose

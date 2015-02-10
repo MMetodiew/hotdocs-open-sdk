@@ -34,7 +34,7 @@ namespace HotDocs.SdkTest
 			string packageID = "d1f7cade-cb74-4457-a9a0-27d94f5c2d5b";
 			string templateFileName = "Demo Employment Agreement.docx";
 			HotDocs.Sdk.PackagePathTemplateLocation location = CreatePackagePathLocation(packageID);
-			Template template;
+			ITemplate template;
 			Assert.IsTrue(File.Exists(location.PackagePath));
 
 			// Verify that null switches and key are resolved to empty strings.
@@ -81,7 +81,7 @@ namespace HotDocs.SdkTest
 			string templateDir = Path.Combine(GetSamplePortalTemplateDir(), "TestTemplates");
 			Assert.IsTrue(Directory.Exists(templateDir));
 			PathTemplateLocation location = new PathTemplateLocation(templateDir);
-			Template template;
+			ITemplate template;
 
 			// Make sure that null fileName causes exception.
 			try
@@ -236,7 +236,7 @@ namespace HotDocs.SdkTest
 			}
 		}
 
-		private void TestTemplate(Template template, TemplateInfo tInfo)
+		private void TestTemplate(ITemplate template, TemplateInfo tInfo)
 		{
 			Assert.IsFalse(template.HasInterview);
 			Assert.IsTrue(template.GeneratesDocument == (tInfo.TmpType != TemplateType.InterviewOnly));
@@ -244,7 +244,7 @@ namespace HotDocs.SdkTest
 			Assert.AreEqual(template.TemplateType, tInfo.TmpType);
 
 			string locator = template.CreateLocator();
-			Template template2 = Template.Locate(locator);
+			ITemplate template2 = Template.Locate(locator);
 
 			Assert.AreEqual(template.FileName, template2.FileName);
 			Assert.AreEqual(template.Key, template2.Key);

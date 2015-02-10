@@ -19,7 +19,7 @@ namespace HotDocs.Sdk.Server
 		/// The WorkItem constructor is protected; it is only called from derived WorkItem classes.
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		protected WorkItem(Template template)
+		protected WorkItem(ITemplate template)
 		{
 			Template = template;
 		}
@@ -49,7 +49,7 @@ namespace HotDocs.Sdk.Server
 		/// interview.  For document work items, this is the template that generates the document.  A single template can
 		/// be (and often is) associated with both an interview work item and a document work item.
 		/// </summary>
-		public Template Template { get; private set; }
+		public ITemplate Template { get; private set; }
 
 		/// <summary>
 		/// A flag indicating whether this work item has been completed or not.  This property is only set by the WorkSession
@@ -78,7 +78,7 @@ namespace HotDocs.Sdk.Server
 		/// is in charge of adding work items to itself.
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		internal InterviewWorkItem(Template template)
+		internal InterviewWorkItem(ITemplate template)
 			: base(template)
 		{
 		}
@@ -126,8 +126,8 @@ namespace HotDocs.Sdk.Server
 		/// The constructor is internal; it is only called from the WorkSession class (and maybe the InterviewWorkItem class).
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		internal DocumentWorkItem(Template template) : this(template, new string[0]) { }
-		internal DocumentWorkItem(Template template, string[] unansweredVariables)
+		internal DocumentWorkItem(ITemplate template) : this(template, new string[0]) { }
+		internal DocumentWorkItem(ITemplate template, string[] unansweredVariables)
 			: base(template)
 		{
 			UnansweredVariables = unansweredVariables;

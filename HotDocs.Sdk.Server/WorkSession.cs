@@ -21,7 +21,7 @@ namespace HotDocs.Sdk.Server
 	/// a copy of the WorkSession's DefaultAssemblySettings; if modified it affects only the current assembly.</param>
 	/// <param name="userState">Whatever state object is passed by the host application into
 	/// WorkSession.AssembleDocuments will be passed back out to the host application in this userState parameter.</param>
-	public delegate void PreAssembleDocumentDelegate(Template template, AnswerCollection answers, AssembleDocumentSettings settings, object userState);
+	public delegate void PreAssembleDocumentDelegate(ITemplate template, AnswerCollection answers, AssembleDocumentSettings settings, object userState);
 
 	/// <summary>
 	/// This delegate type allows a host application to request notification immediately following the SDK assembling
@@ -34,7 +34,7 @@ namespace HotDocs.Sdk.Server
 	/// work in this WorkSession.</param>
 	/// <param name="userState">Whatever state object is passed by the host application into
 	/// WorkSession.AssembleDocuments will be passed back out to the host application in this userState parameter.</param>
-	public delegate void PostAssembleDocumentDelegate(Template template, AssembleDocumentResult result, object userState);
+	public delegate void PostAssembleDocumentDelegate(ITemplate template, AssembleDocumentResult result, object userState);
 
 	/// <summary>
 	/// WorkSession is a state machine enabling a host application to easily navigate an assembly queue.
@@ -55,7 +55,7 @@ namespace HotDocs.Sdk.Server
 		/// HotDocs Server with which the host app is communicating.</param>
 		/// <param name="template">The template upon which this WorkSession is based. The initial interview and/or
 		/// document work items in the WorkSession will be based on this template (including its Switches property).</param>
-		public WorkSession(IServices service, Template template) : this(service, template, null, null) { }
+		public WorkSession(IServices service, ITemplate template) : this(service, template, null, null) { }
 
 		/// <summary>
 		/// Creates a WorkSession object that a host application can use to step through the process of presenting
@@ -68,7 +68,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="answers">A collection of XML answers to use as a starting point for the work session.
 		/// The initial interview (if any) will be pre-populated with these answers, and the subsequent generation
 		/// of documents will have access to these answers as well.</param>
-		public WorkSession(IServices service, Template template, TextReader answers) : this(service, template, answers, null) {}
+		public WorkSession(IServices service, ITemplate template, TextReader answers) : this(service, template, answers, null) {}
 		/// <summary>
 		/// Creates a WorkSession object that a host application can use to step through the process of presenting
 		/// all the interviews and assembling all the documents that may result from the given template.
@@ -83,7 +83,7 @@ namespace HotDocs.Sdk.Server
 		/// The initial interview (if any) will be pre-populated with these answers, and the subsequent generation
 		/// of documents will have access to these answers as well.</param>
 		/// <param name="defaultInterviewSettings">The default interview settings to be used throughout the session</param>
-		public WorkSession(IServices service, Template template, TextReader answers, InterviewSettings defaultInterviewSettings)
+		public WorkSession(IServices service, ITemplate template, TextReader answers, InterviewSettings defaultInterviewSettings)
 		{
 			_service = service;
 			AnswerCollection = new AnswerCollection();
@@ -358,7 +358,7 @@ namespace HotDocs.Sdk.Server
 			}
 		}
 
-		private void InsertNewWorkItems(IEnumerable<Template> templates, int parentPosition)
+		private void InsertNewWorkItems(IEnumerable<ITemplate> templates, int parentPosition)
 		{
 			int insertPosition = parentPosition + 1;
 			foreach (var template in templates)

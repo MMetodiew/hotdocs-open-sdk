@@ -137,7 +137,7 @@ namespace HotDocs.Sdk.Server
 				return extractedString;
 		}
 
-		internal static void AppendSdkScriptBlock(StringBuilder interview, Template template, InterviewSettings settings)
+		internal static void AppendSdkScriptBlock(StringBuilder interview, ITemplate template, InterviewSettings settings)
 		{
 			// Append the SDK specific script block begin
 			interview.AppendLine();
@@ -218,7 +218,7 @@ namespace HotDocs.Sdk.Server
 			interview.AppendLine("</script>");
 		}
 
-		internal static string GetInterviewDefinitionUrl(InterviewSettings settings, Template template)
+		internal static string GetInterviewDefinitionUrl(InterviewSettings settings, ITemplate template)
 		{
 			// Start with the base InterviewFilesUrl and see if it already has a query string.
 			//  If so, we will just be adding parameters. Otherwise, we will be appending a new query string to the base url.
@@ -228,7 +228,7 @@ namespace HotDocs.Sdk.Server
 			return url;
 		}
 
-		internal static string GetInterviewImageUrl(InterviewSettings settings, Template template)
+		internal static string GetInterviewImageUrl(InterviewSettings settings, ITemplate template)
 		{
 			// This is the same as the interview definition URL, but we also add the type and template parameters to the query string.
 			return GetInterviewDefinitionUrl(settings, template) + "&type=img&template=";
@@ -485,7 +485,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="asmResult">The <c>AssemblyResult</c> to convert.</param>
 		/// <param name="docType">The type of document contained in the result.</param>
 		/// <returns>An <c>AssembleDocumentResult</c>, which contains the same document as the <c>asmResult</c>.</returns>
-		internal static AssembleDocumentResult ConvertAssemblyResult(Template template, AssemblyResult asmResult, DocumentType docType)
+		internal static AssembleDocumentResult ConvertAssemblyResult(ITemplate template, AssemblyResult asmResult, DocumentType docType)
 		{
 			AssembleDocumentResult result = null;
 			MemoryStream document = null;
@@ -493,7 +493,7 @@ namespace HotDocs.Sdk.Server
 			List<NamedStream> supportingFiles = new List<NamedStream>();
 
 			// Create the list of pending assemblies.
-			IEnumerable<Template> pendingAssemblies =
+			IEnumerable<ITemplate> pendingAssemblies =
 				asmResult.PendingAssemblies == null
 				? new List<Template>()
 				: from pa in asmResult.PendingAssemblies

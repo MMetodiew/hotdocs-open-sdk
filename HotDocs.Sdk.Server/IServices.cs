@@ -38,7 +38,7 @@ namespace HotDocs.Sdk.Server
 		/// 	from <see cref="AssembleDocument" />.</param>
 		/// <include file="../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns>Returns the results of building the interview as an <see cref="InterviewResult"/> object.</returns>
-		InterviewResult GetInterview(Template template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef);
+		InterviewResult GetInterview(ITemplate template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef);
 
 		/// <summary>
 		/// Assemble a document from the given template, answers and settings.
@@ -49,7 +49,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="settings">An instance of the AssembleDocumentResult class.</param>
 		/// <include file="../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns>An AssemblyResult object containing all the files and data resulting from the request.</returns>
-		AssembleDocumentResult AssembleDocument(Template template, TextReader answers, AssembleDocumentSettings settings, string logRef);
+		AssembleDocumentResult AssembleDocument(ITemplate template, TextReader answers, AssembleDocumentSettings settings, string logRef);
 
 		/// <summary>
 		/// GetComponentInfo returns metadata about the variables/types (and optionally dialogs and mapping info)
@@ -59,7 +59,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="includeDialogs">Whether to include dialog &amp; mapping information in the returned results.</param>
 		/// <include file="../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns>The requested component information.</returns>
-		ComponentInfo GetComponentInfo(Template template, bool includeDialogs, string logRef);
+		ComponentInfo GetComponentInfo(ITemplate template, bool includeDialogs, string logRef);
 
 		/// <summary>
 		/// This method overlays any answer collections passed into it, into a single XML answer collection.
@@ -80,13 +80,13 @@ namespace HotDocs.Sdk.Server
 		/// </summary>
 		/// <param name="template">The template for which support files will be built.</param>
 		/// <param name="flags">Indicates what types of support files to build.</param>
-		void BuildSupportFiles(Template template, HDSupportFilesBuildFlags flags);
+		void BuildSupportFiles(ITemplate template, HDSupportFilesBuildFlags flags);
 
 		/// <summary>
 		/// Remove the server files for the specified template.
 		/// </summary>
 		/// <param name="template">The template for which support files will be removed.</param>
-		void RemoveSupportFiles(Template template);
+		void RemoveSupportFiles(ITemplate template);
 
 		/// <summary>
 		/// Retrieves a file required by the interview. This could be either an interview definition that contains the 
@@ -99,7 +99,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="fileType">The type of file being requested: img (image file), js (JavaScript interview definition), 
 		/// or dll (Silverlight interview definition).</param>
 		/// <returns>A stream containing the requested interview file, to be returned to the caller.</returns>
-		Stream GetInterviewFile(Template template, string fileName, string fileType);
+		Stream GetInterviewFile(ITemplate template, string fileName, string fileType);
 
 		// Get the template manifest for the specified template. Can optionally parse an entire template manifest spanning tree.
 		//TemplateManifest GetManifest(string templateLocator, string templateFileName, ManifestParseFlags parseFlags);

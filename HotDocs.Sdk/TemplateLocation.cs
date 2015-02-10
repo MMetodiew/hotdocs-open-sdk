@@ -121,7 +121,7 @@ namespace HotDocs.Sdk
 		/// <param name="template">The template.</param>
 		/// <param name="fileName">The updated file name for the specified template.</param>
 		/// <returns>True if the file name was updated, or false otherwise.</returns>
-		public virtual bool GetUpdatedFileName(Template template, out string fileName)
+		public virtual bool GetUpdatedFileName(ITemplate template, out string fileName)
 		{
 			fileName = "";
 			return false;

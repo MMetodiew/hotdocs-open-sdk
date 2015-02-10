@@ -216,7 +216,7 @@ namespace HotDocs.Sdk.DataServices
 
 			try
 			{
-				Template template = Template.Locate(templateLocator);
+				ITemplate template = Template.Locate(templateLocator);
 				TemplateManifest templateManifest = template.GetManifest(ManifestParseFlags.ParseDataSources);
 
 				DataSource dataSource = templateManifest.DataSources.Single(ds => string.CompareOrdinal(ds.Id, dataSourceId) == 0);

@@ -91,7 +91,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="uploadPackage">Indicates if the package should be uploaded (forcefully) or not. This should only be true if the package does not already exist in the Cloud Services cache.</param>
 		/// <returns></returns>
 		protected internal override AssemblyResult AssembleDocumentImpl(
-			Template template,
+			ITemplate template,
 			string answers,
 			AssembleDocumentSettings settings,
 			string billingRef,
@@ -185,7 +185,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="uploadPackage">Indicates if the package should be uploaded (forcefully) or not. This should only be true if the package does not already exist in the Cloud Services cache.</param>
 		/// <returns></returns>
 		protected internal override BinaryObject[] GetInterviewImpl(
-			Template template,
+			ITemplate template,
 			string answers,
 			InterviewSettings settings,
 			string billingRef,
@@ -256,7 +256,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="uploadPackage">Indicates if the package should be uploaded (forcefully) or not. This should only be true if the package does not already exist in the Cloud Services cache.</param>
 		/// <returns></returns>
 		protected internal override ComponentInfo GetComponentInfoImpl(
-			Template template,
+			ITemplate template,
 			bool includeDialogs,
 			string billingRef,
 			bool uploadPackage)

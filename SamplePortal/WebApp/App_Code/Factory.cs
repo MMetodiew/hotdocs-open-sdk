@@ -40,7 +40,7 @@ namespace SamplePortal
 		/// <returns></returns>
 		public static HotDocs.Sdk.Server.WorkSession CreateWorkSession(System.Web.SessionState.HttpSessionState session, string packageID, string templateTitle)
 		{
-			HotDocs.Sdk.Template template = OpenTemplate(packageID);
+			HotDocs.Sdk.ITemplate template = OpenTemplate(packageID);
 			template.Title = templateTitle;
 			HotDocs.Sdk.Server.IServices service = GetServices();
 			HotDocs.Sdk.Server.WorkSession workSession = new HotDocs.Sdk.Server.WorkSession(service, template);
@@ -110,7 +110,7 @@ namespace SamplePortal
 			throw new Exception("Unsupported protocol.");
 		}
 
-		private static HotDocs.Sdk.Template OpenTemplate(string packageId)
+		private static HotDocs.Sdk.ITemplate OpenTemplate(string packageId)
 		{
 			//Note that in this sample portal, the package ID is used to construct the package file name, but this does not need to be the case.
 			string packagePath = PackageCache.GetLocalPackagePath(packageId);

@@ -60,7 +60,7 @@ namespace HotDocs.Sdk.ServerTest
 			return new HotDocs.Sdk.PackagePathTemplateLocation(packageID, packagePath);
 		}
 
-		public static HotDocs.Sdk.Template OpenTemplate(string packageID)
+		public static HotDocs.Sdk.ITemplate OpenTemplate(string packageID)
 		{
 			return new HotDocs.Sdk.Template(CreatePackagePathLocation(packageID));
 		}

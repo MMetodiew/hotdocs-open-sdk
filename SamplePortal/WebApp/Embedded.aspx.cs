@@ -86,7 +86,7 @@ public partial class Embedded : System.Web.UI.Page
 
 			// Create the new session.
 			InterviewFormat format = HotDocs.Sdk.Util.ReadConfigurationEnum<InterviewFormat>("InterviewFormat", InterviewFormat.Unspecified);
-			HotDocs.Sdk.Template template = new HotDocs.Sdk.Template(new HotDocs.Sdk.PackagePathTemplateLocation(_packageID, Path.Combine(Settings.TemplatePath, _packageID + ".pkg")));
+			HotDocs.Sdk.ITemplate template = new HotDocs.Sdk.Template(new HotDocs.Sdk.PackagePathTemplateLocation(_packageID, Path.Combine(Settings.TemplatePath, _packageID + ".pkg")));
 			return client.CreateSession(template, null, null, null, format);
 		}
 	}

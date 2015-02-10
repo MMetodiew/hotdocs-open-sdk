@@ -133,7 +133,7 @@ namespace HotDocs.Sdk.ServerTest
 		private void GetInterview(IServices svc, string logRef)
 		{
 			// Set up the InterviewOptions for the test.
-			Template tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
+			ITemplate tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
 			string postInterviewUrl = "PostInterview.aspx";
 			string styleSheetUrl = "HDServerFiles/Stylesheets";
 			string runtimeUrl = "HDServerFiles/js";
@@ -237,7 +237,7 @@ namespace HotDocs.Sdk.ServerTest
 
 		private void AssembleDocument(IServices svc, string logRef)
 		{
-			Template tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
+			ITemplate tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
 			TextReader answers = new StringReader("");
 			AssembleDocumentSettings settings = new AssembleDocumentSettings();
 			AssembleDocumentResult result;
@@ -316,7 +316,7 @@ namespace HotDocs.Sdk.ServerTest
 
 		private void GetComponentInfo(IServices svc, string logRef)
 		{
-			Template tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
+			ITemplate tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
 			Server.Contracts.ComponentInfo result;
 
 			// Ensure that invalid parameters are throwing appropriate exceptions.
@@ -475,7 +475,7 @@ namespace HotDocs.Sdk.ServerTest
 
 		private void BuildSupportFiles(IServices svc)
 		{
-			Template template = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
+			ITemplate template = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
 
 			try
 			{
@@ -529,7 +529,7 @@ namespace HotDocs.Sdk.ServerTest
 
 		private void RemoveSupportFiles(IServices svc)
 		{
-			Template tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
+			ITemplate tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
 			try
 			{
 				svc.RemoveSupportFiles(tmp);
@@ -579,7 +579,7 @@ namespace HotDocs.Sdk.ServerTest
 
 		private void GetInterviewFile(IServices svc)
 		{
-			Template template = null;
+			ITemplate template = null;
 			string fileName = null;
 			string fileType = null;
 

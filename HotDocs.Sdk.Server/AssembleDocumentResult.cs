@@ -22,7 +22,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="answers">The answers after the assembly has finished. (Depending on template scripting, the answers may be different at the end of the assembly than at the start.)</param>
 		/// <param name="pendingAssemblies">A list of assemblies to complete as a result of finishing this assembly.</param>
 		/// <param name="unansweredVariables">A list of variables that were unanswered during the assembly.</param>
-		internal AssembleDocumentResult(Document document, string answers, IEnumerable<Template> pendingAssemblies, IEnumerable<string> unansweredVariables)
+		internal AssembleDocumentResult(Document document, string answers, IEnumerable<ITemplate> pendingAssemblies, IEnumerable<string> unansweredVariables)
 		{
 			Document = document;
 			if (answers != null)
@@ -47,7 +47,7 @@ namespace HotDocs.Sdk.Server
 		/// An collection of assemblies that need to be completed after this assembly is finished
 		/// (results of ASSEMBLE instructions in the assembled template).
 		/// </summary>
-		public IEnumerable<Template> PendingAssemblies { get; private set; }
+		public IEnumerable<ITemplate> PendingAssemblies { get; private set; }
 
 		/// <summary>
 		/// Returns the number of pending assemblies (or 0 if it is null)
@@ -59,7 +59,7 @@ namespace HotDocs.Sdk.Server
 				if (PendingAssemblies == null)
 					return 0;
 				else
-					return PendingAssemblies.Count<Template>();
+					return PendingAssemblies.Count<ITemplate>();
 			}
 		}
 

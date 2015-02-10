@@ -71,7 +71,7 @@ namespace HotDocs.Sdk.Server.Cloud
 		/// <param name="markedVariables">A collection of variables that should be marked with special formatting in the interview.</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>An object which contains an HTML fragment to be inserted in a web page to display the interview.</returns>
-		public InterviewResult GetInterview(Template template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
+		public InterviewResult GetInterview(ITemplate template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -126,7 +126,7 @@ namespace HotDocs.Sdk.Server.Cloud
 		/// <param name="settings">The settings for the assembly.</param>
 		/// <include file="../../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns>An <c>AssembleDocumentResult</c> that contains the results of the assembly.</returns>
-		public AssembleDocumentResult AssembleDocument(Template template, System.IO.TextReader answers, AssembleDocumentSettings settings, string logRef)
+		public AssembleDocumentResult AssembleDocument(ITemplate template, System.IO.TextReader answers, AssembleDocumentSettings settings, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -166,7 +166,7 @@ namespace HotDocs.Sdk.Server.Cloud
 		/// <param name="includeDialogs">Indicates whether or not information about dialogs should be included.</param>
 		/// <param name="logRef">This parameter lets you specify information that will be included in usage logs for this call. For example, you can use a string to uniquely identify the end user that initiated the request and/or the context in which the call was made. When you review usage logs, you can then see which end users initiated each request. That information could then be used to pass costs on to those end users if desired.</param>
 		/// <returns></returns>
-		public ComponentInfo GetComponentInfo(Template template, bool includeDialogs, string logRef)
+		public ComponentInfo GetComponentInfo(ITemplate template, bool includeDialogs, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -210,7 +210,7 @@ namespace HotDocs.Sdk.Server.Cloud
 		/// </summary>
 		/// <param name="template">The template for which support files will be built.</param>
 		/// <param name="flags">Indicates what types of support files to build.</param>
-		public void BuildSupportFiles(Template template, HDSupportFilesBuildFlags flags)
+		public void BuildSupportFiles(ITemplate template, HDSupportFilesBuildFlags flags)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"Cloud.Services.BuildSupportFiles: the ""template"" parameter passed in was null");
@@ -224,7 +224,7 @@ namespace HotDocs.Sdk.Server.Cloud
 		/// rather than building and caching them separately.
 		/// </summary>
 		/// <param name="template">The template for which support files will be removed.</param>
-		public void RemoveSupportFiles(Template template)
+		public void RemoveSupportFiles(ITemplate template)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"Cloud.Services.RemoveSupportFiles: the ""template"" parameter passed in was null");
@@ -242,7 +242,7 @@ namespace HotDocs.Sdk.Server.Cloud
 		/// <param name="fileType">The type of file being requested: img (image file), js (JavaScript interview definition), 
 		/// or dll (Silverlight interview definition).</param>
 		/// <returns>A stream containing the requested interview file, to be returned to the caller.</returns>
-		public Stream GetInterviewFile(Template template, string fileName, string fileType)
+		public Stream GetInterviewFile(ITemplate template, string fileName, string fileType)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			if (template == null)

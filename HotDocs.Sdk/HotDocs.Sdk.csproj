@@ -55,6 +55,7 @@
     <Compile Include="DateValue.cs" />
     <Compile Include="Dependency.cs" />
     <Compile Include="InterviewSettings.cs" />
+    <Compile Include="ITemplate.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="PackagePathTemplateLocation.cs" />
     <Compile Include="PackageTemplateLocation.cs" />

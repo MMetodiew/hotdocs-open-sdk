@@ -13,7 +13,7 @@ namespace HotDocs.Sdk
 	/// The subfolder's name consists of the package ID followed by a ".dir" extension. To extract package
 	/// content elsewhere, derive a different PackageTemplateLocation class.
 	/// </summary>
-    public class PackagePathTemplateLocation : PackageTemplateLocation
+    public class PackagePathTemplateLocation : PackageTemplateLocation, ITemplateLocationOnDisk
 	{
 		/// <summary>
 		/// Construct a template location for a specific package in the file system.
@@ -63,7 +63,13 @@ namespace HotDocs.Sdk
 			ExtractPackageFiles();
 			return _templateDir;
 		}
-		/// <summary>
+
+	    ITemplateLocationOnDisk ITemplateLocationOnDisk.Duplicate()
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    /// <summary>
 		/// Returns a read-only stream for the package file.
 		/// </summary>
 		/// <returns></returns>

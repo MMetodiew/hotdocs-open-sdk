@@ -12,7 +12,7 @@ namespace HotDocs.Sdk
 	/// for a template that simply resides as a file in the file system. The template does not reside in
 	/// a package or database, for example.
 	/// </summary>
-    public class PathTemplateLocation : TemplateLocation
+    public class PathTemplateLocation : TemplateLocation, ITemplateLocationOnDisk
 	{
 		private string _templateDir;//The directory where the template resides.
 
@@ -85,7 +85,13 @@ namespace HotDocs.Sdk
 		{
 			return _templateDir;
 		}
-		/// <summary>
+
+	    ITemplateLocationOnDisk ITemplateLocationOnDisk.Duplicate()
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    /// <summary>
 		/// Serialize the content of this object. Overrides <see cref="TemplateLocation.SerializeContent"/>.
 		/// </summary>
 		/// <returns></returns>

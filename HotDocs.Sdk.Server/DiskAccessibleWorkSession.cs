@@ -20,7 +20,7 @@ public class DiskAccessibleWorkSession : WorkSession
     /// HotDocs Server with which the host app is communicating.</param>
     /// <param name="template">The template upon which this WorkSession is based. The initial interview and/or
     /// document work items in the WorkSession will be based on this template (including its Switches property).</param>
-    public DiskAccessibleWorkSession(IServicesUsingTemplatesOnDisk service, IOnDiskTemplate template) : this(service, template, null, null) { }
+    public DiskAccessibleWorkSession(IServicesUsingTemplatesOnDisk service, ITemplateOnDisk template) : this(service, template, null, null) { }
 
     /// <summary>
     /// Creates a WorkSession object that a host application can use to step through the process of presenting
@@ -33,7 +33,7 @@ public class DiskAccessibleWorkSession : WorkSession
     /// <param name="answers">A collection of XML answers to use as a starting point for the work session.
     /// The initial interview (if any) will be pre-populated with these answers, and the subsequent generation
     /// of documents will have access to these answers as well.</param>
-    public DiskAccessibleWorkSession(IServicesUsingTemplatesOnDisk service, IOnDiskTemplate template, TextReader answers) : this(service, template, answers, null) { }
+    public DiskAccessibleWorkSession(IServicesUsingTemplatesOnDisk service, ITemplateOnDisk template, TextReader answers) : this(service, template, answers, null) { }
     /// <summary>
     /// Creates a WorkSession object that a host application can use to step through the process of presenting
     /// all the interviews and assembling all the documents that may result from the given template.
@@ -48,7 +48,7 @@ public class DiskAccessibleWorkSession : WorkSession
     /// The initial interview (if any) will be pre-populated with these answers, and the subsequent generation
     /// of documents will have access to these answers as well.</param>
     /// <param name="defaultInterviewSettings">The default interview settings to be used throughout the session</param>
-    public DiskAccessibleWorkSession(IServicesUsingTemplatesOnDisk service, IOnDiskTemplate template, TextReader answers, InterviewSettings defaultInterviewSettings)
+    public DiskAccessibleWorkSession(IServicesUsingTemplatesOnDisk service, ITemplateOnDisk template, TextReader answers, InterviewSettings defaultInterviewSettings)
     {
         _service = service;
         AnswerCollection = new AnswerCollection();

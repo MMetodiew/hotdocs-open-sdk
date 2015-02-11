@@ -19,7 +19,7 @@ namespace HotDocs.Sdk.Server
 		/// The WorkItem constructor is protected; it is only called from derived WorkItem classes.
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		protected DiskAccessibleWorkItem(IOnDiskTemplate template)
+		protected DiskAccessibleWorkItem(ITemplateOnDisk template)
 		{
 			Template = template;
 		}
@@ -49,7 +49,7 @@ namespace HotDocs.Sdk.Server
 		/// interview.  For document work items, this is the template that generates the document.  A single template can
 		/// be (and often is) associated with both an interview work item and a document work item.
 		/// </summary>
-		public IOnDiskTemplate Template { get; private set; }
+		public ITemplateOnDisk Template { get; private set; }
 
 		/// <summary>
 		/// A flag indicating whether this work item has been completed or not.  This property is only set by the WorkSession
@@ -78,7 +78,7 @@ namespace HotDocs.Sdk.Server
 		/// is in charge of adding work items to itself.
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		internal DiskAccessibleInterviewWorkItem(IOnDiskTemplate template)
+		internal DiskAccessibleInterviewWorkItem(ITemplateOnDisk template)
 			: base(template)
 		{
 		}
@@ -126,8 +126,8 @@ namespace HotDocs.Sdk.Server
 		/// The constructor is internal; it is only called from the WorkSession class (and maybe the InterviewWorkItem class).
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		internal DiskAccessibleDocumentWorkItem(IOnDiskTemplate template) : this(template, new string[0]) { }
-        internal DiskAccessibleDocumentWorkItem(IOnDiskTemplate template, string[] unansweredVariables)
+		internal DiskAccessibleDocumentWorkItem(ITemplateOnDisk template) : this(template, new string[0]) { }
+        internal DiskAccessibleDocumentWorkItem(ITemplateOnDisk template, string[] unansweredVariables)
 			: base(template)
 		{
 			UnansweredVariables = unansweredVariables;

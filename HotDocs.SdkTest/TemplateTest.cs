@@ -24,8 +24,8 @@ namespace HotDocs.SdkTest
 	{
 		public TemplateTest()
 		{
-			HotDocs.Sdk.TemplateLocation.RegisterLocation(typeof(HotDocs.Sdk.PathTemplateLocation));
-			HotDocs.Sdk.TemplateLocation.RegisterLocation(typeof(HotDocs.Sdk.PackagePathTemplateLocation));
+			TemplateLocationSerializer.RegisterLocation(typeof(HotDocs.Sdk.PathTemplateLocation));
+			TemplateLocationSerializer.RegisterLocation(typeof(HotDocs.Sdk.PackagePathTemplateLocation));
 		}
 
 		[TestMethod]
@@ -81,7 +81,7 @@ namespace HotDocs.SdkTest
 			string templateDir = Path.Combine(GetSamplePortalTemplateDir(), "TestTemplates");
 			Assert.IsTrue(Directory.Exists(templateDir));
 			PathTemplateLocation location = new PathTemplateLocation(templateDir);
-			IOnDiskTemplate template;
+			ITemplateOnDisk template;
 
 			// Make sure that null fileName causes exception.
 			try
@@ -151,7 +151,7 @@ namespace HotDocs.SdkTest
 
 			try
 			{
-				HotDocs.Sdk.TemplateLocation.RegisterLocation(typeof(string));
+				TemplateLocationSerializer.RegisterLocation(typeof(string));
 				Assert.Fail();
 			}
 			catch (Exception ex)
@@ -325,12 +325,12 @@ namespace HotDocs.SdkTest
 			PathTemplateLocation loc5 = null;
 
 			// Try to get a TemplateLocation from an invalid locator.
-			TemplateLocation loc = TemplateLocation.Locate(Util.EncryptString("abcdefg"));
+			ITemplateAnywhere loc = TemplateLocation.Locate(Util.EncryptString("abcdefg"));
 			Assert.IsNull(loc);
 
 			try
 			{
-				loc = TemplateLocation.Locate(Util.EncryptString("abc|defg"));
+				loc = ITemplateAnywhere.Locate(Util.EncryptString("abc|defg"));
 				Assert.Fail();
 			}
 			catch (Exception ex)

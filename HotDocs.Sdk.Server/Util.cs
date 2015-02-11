@@ -485,7 +485,7 @@ namespace HotDocs.Sdk.Server
 		/// <param name="asmResult">The <c>AssemblyResult</c> to convert.</param>
 		/// <param name="docType">The type of document contained in the result.</param>
 		/// <returns>An <c>AssembleDocumentResult</c>, which contains the same document as the <c>asmResult</c>.</returns>
-		internal static OffDiskAssembleDocumentResult ConvertAssemblyResult(ITemplate template, AssemblyResult asmResult, DocumentType docType)
+        internal static OffDiskAssembleDocumentResult ConvertAssemblyResult(ITemplate template, AssemblyResult asmResult, DocumentType docType)
 		{
 			OffDiskAssembleDocumentResult result = null;
 			MemoryStream document = null;
@@ -493,11 +493,11 @@ namespace HotDocs.Sdk.Server
 			List<NamedStream> supportingFiles = new List<NamedStream>();
 
 			// Create the list of pending assemblies.
-			IEnumerable<ITemplate> pendingAssemblies =
+            IEnumerable<ITemplate> pendingAssemblies =
 				asmResult.PendingAssemblies == null
-				? new List<Template>()
+                ? new List<TemplateAnywhere>()
 				: from pa in asmResult.PendingAssemblies
-				  select new Template(
+				  select new TemplateAnywhere(
 					  Path.GetFileName(pa.TemplateName), template.Location.Duplicate(), pa.Switches);
 
 			for (int i = 0; i < asmResult.Documents.Length; i++)
@@ -539,7 +539,7 @@ namespace HotDocs.Sdk.Server
         /// <param name="asmResult">The <c>AssemblyResult</c> to convert.</param>
         /// <param name="docType">The type of document contained in the result.</param>
         /// <returns>An <c>AssembleDocumentResult</c>, which contains the same document as the <c>asmResult</c>.</returns>
-        internal static OnDiskAssembleDocumentResult ConvertAssemblyResult(IOnDiskTemplate template, AssemblyResult asmResult, DocumentType docType)
+        internal static OnDiskAssembleDocumentResult ConvertAssemblyResult(ITemplateOnDisk template, AssemblyResult asmResult, DocumentType docType)
         {
             OnDiskAssembleDocumentResult result = null;
             MemoryStream document = null;
@@ -547,11 +547,11 @@ namespace HotDocs.Sdk.Server
             List<NamedStream> supportingFiles = new List<NamedStream>();
 
             // Create the list of pending assemblies.
-            IEnumerable<IOnDiskTemplate> pendingAssemblies =
+            IEnumerable<ITemplateOnDisk> pendingAssemblies =
                 asmResult.PendingAssemblies == null
-                ? new List<DiskAccessibleTemplate>()
+                ? new List<TemplateOnDisk>()
                 : from pa in asmResult.PendingAssemblies
-                  select new DiskAccessibleTemplate(
+                  select new TemplateOnDisk(
                       Path.GetFileName(pa.TemplateName), template.Location.Duplicate(), pa.Switches);
 
             for (int i = 0; i < asmResult.Documents.Length; i++)

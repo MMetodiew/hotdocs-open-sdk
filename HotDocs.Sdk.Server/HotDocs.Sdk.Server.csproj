@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Cloud\Cloud.Services.cs" />
     <Compile Include="DiskAccessibleWorkSession.cs" />
+    <Compile Include="IServicesUsingTemplatesOnDisk.cs" />
+    <Compile Include="IServiceUsingTemplatesAnywhere.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="OffDiskAssembleDocumentResult.cs" />
     <Compile Include="OnDiskAssembleDocumentResult.cs" />

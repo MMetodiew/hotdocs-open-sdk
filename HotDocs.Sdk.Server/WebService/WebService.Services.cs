@@ -76,7 +76,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// <param name="markedVariables">A collection of variables that should be marked with special formatting in the interview.</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>An object which contains an HTML fragment to be inserted in a web page to display the interview.</returns>
-		public InterviewResult GetInterview(IOnDiskTemplate template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
+		public InterviewResult GetInterview(ITemplateOnDisk template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -143,7 +143,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// These settings include the assembled document format (file extension), markup syntax, how to display fields with unanswered variables, etc</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>returns information about the assembled document, the document type, the unanswered variables, the resulting answers, etc.</returns>
-        public OnDiskAssembleDocumentResult AssembleDocument(IOnDiskTemplate template, TextReader answers, AssembleDocumentSettings settings, string logRef)
+        public OnDiskAssembleDocumentResult AssembleDocument(ITemplateOnDisk template, TextReader answers, AssembleDocumentSettings settings, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -191,7 +191,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// <param name="includeDialogs">Whether to include dialog and mapping information in the returned results.</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>returns the list of variables and dialogs (if includeDialogs is true) associated with the <c>template</c> parameter</returns>
-		public ComponentInfo GetComponentInfo(IOnDiskTemplate template, bool includeDialogs, string logRef)
+		public ComponentInfo GetComponentInfo(ITemplateOnDisk template, bool includeDialogs, string logRef)
 		{
 			string logStr = logRef == null ? string.Empty : logRef;
 			if (template == null)
@@ -241,7 +241,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// Silverlight DLLs will be generated</param>
 		/// <param name="flags">A set of flags to control whether javascript or SilverLight files will be generated, 
 		/// as well as whether to build files for templates included with an assemble instruction.</param>
-		public void BuildSupportFiles(IOnDiskTemplate template, HDSupportFilesBuildFlags flags)
+		public void BuildSupportFiles(ITemplateOnDisk template, HDSupportFilesBuildFlags flags)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"WebService.Services.BuildSupportFiles: The ""template"" parameter passed in was null.");
@@ -260,7 +260,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// </summary>
 		/// <param name="template">An instance of the Template class, for which the supporting javascript files and 
 		/// Silverlight DLLs will be removed</param>
-		public void RemoveSupportFiles(IOnDiskTemplate template)
+		public void RemoveSupportFiles(ITemplateOnDisk template)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"WebService.Services.RemoveSupportFiles: The ""template"" parameter passed in was null.");
@@ -285,7 +285,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// <param name="fileType">The type of file being requested: img (image file), js (JavaScript interview definition), 
 		/// or dll (Silverlight interview definition).</param>
 		/// <returns>A stream containing the requested interview file, to be returned to the caller.</returns>
-		public Stream GetInterviewFile(IOnDiskTemplate template, string fileName, string fileType)
+		public Stream GetInterviewFile(ITemplateOnDisk template, string fileName, string fileType)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			if (template == null)

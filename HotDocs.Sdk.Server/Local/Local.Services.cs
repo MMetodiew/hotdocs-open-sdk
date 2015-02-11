@@ -48,7 +48,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// <param name="includeDialogs">True if dialog components are to be included in the returned <c>ComponentInfo</c>.</param>
 		/// <include file="../../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns></returns>
-        public ComponentInfo GetComponentInfo(IOnDiskTemplate template, bool includeDialogs, string logRef)
+        public ComponentInfo GetComponentInfo(ITemplateOnDisk template, bool includeDialogs, string logRef)
 		{
 			string logStr = logRef == null ? string.Empty : logRef;
 
@@ -157,7 +157,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// 	from <see cref="AssembleDocument" />.</param>
 		/// <include file="../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns>Returns the results of building the interview as an <see cref="InterviewResult"/> object.</returns>
-        public InterviewResult GetInterview(IOnDiskTemplate template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
+        public InterviewResult GetInterview(ITemplateOnDisk template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -259,7 +259,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// <param name="fileType">The type of file being requested: img (image file), js (JavaScript interview definition), 
 		/// or dll (Silverlight interview definition).</param>
 		/// <returns>A stream containing the requested interview file, to be returned to the caller.</returns>
-		public Stream GetInterviewFile(IOnDiskTemplate template, string fileName, string fileType)
+		public Stream GetInterviewFile(ITemplateOnDisk template, string fileName, string fileType)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			if (template == null)
@@ -294,7 +294,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// <param name="settings">An instance of the AssembleDocumentResult class.</param>
 		/// <include file="../Shared/Help.xml" path="Help/string/param[@name='logRef']"/>
 		/// <returns>An AssemblyResult object containing all the files and data resulting from the request.</returns>
-        public OnDiskAssembleDocumentResult AssembleDocument(IOnDiskTemplate template, TextReader answers, AssembleDocumentSettings settings, string logRef)
+        public OnDiskAssembleDocumentResult AssembleDocument(ITemplateOnDisk template, TextReader answers, AssembleDocumentSettings settings, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -323,13 +323,13 @@ namespace HotDocs.Sdk.Server.Local
 			string resultAnsXml = resultAnsColl.GetXMLString(false, settings.RetainTransientAnswers || _app.PendingAssemblyCmdLineStrings.Count > 0);
 
 			//Build the list of pending assemblies.
-			List<IOnDiskTemplate> pendingAssemblies = new List<IOnDiskTemplate>();
+			List<ITemplateOnDisk> pendingAssemblies = new List<ITemplateOnDisk>();
 			for (int i = 0; i < _app.PendingAssemblyCmdLineStrings.Count; i++)
 			{
 				string cmdLine = _app.PendingAssemblyCmdLineStrings[i];
 				string path, switches;
 				Util.ParseHdAsmCmdLine(cmdLine, out path, out switches);
-				pendingAssemblies.Add(new DiskAccessibleTemplate(Path.GetFileName(path), template.Location.Duplicate(), switches));
+				pendingAssemblies.Add(new TemplateOnDisk(Path.GetFileName(path), template.Location.Duplicate(), switches));
 			}
 
 			//Prepare the document stream and image information for the browser.
@@ -410,7 +410,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// </summary>
 		/// <param name="template">The template for which support files will be built.</param>
 		/// <param name="flags">Indicates what types of support files to build.</param>
-		public void BuildSupportFiles(IOnDiskTemplate template, HDSupportFilesBuildFlags flags)
+		public void BuildSupportFiles(ITemplateOnDisk template, HDSupportFilesBuildFlags flags)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"Local.Services.BuildSupportFiles: the ""template"" parameter passed in was null");
@@ -433,7 +433,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// Remove the server files for the specified template.
 		/// </summary>
 		/// <param name="template">The template for which support files will be removed.</param>
-		public void RemoveSupportFiles(IOnDiskTemplate template)
+		public void RemoveSupportFiles(ITemplateOnDisk template)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"Local.Services.RemoveSupportFiles: the ""template"" parameter passed in was null");
@@ -452,7 +452,7 @@ namespace HotDocs.Sdk.Server.Local
 		/// <param name="template">The template for which to create a temporary document directory.</param>
 		/// <param name="docType">The type of document for which to create the temporary directory (and file).</param>
 		/// <returns>The file name and path of the temporary file.</returns>
-		private string CreateTempDocDirAndPath(IOnDiskTemplate template, DocumentType docType)
+		private string CreateTempDocDirAndPath(ITemplateOnDisk template, DocumentType docType)
 		{
 			string dirPath;
 			string ext = Template.GetDocExtension(docType, template);

@@ -446,9 +446,9 @@ namespace HotDocs.Sdk
 		private struct TemplateFileLocation : IEquatable<TemplateFileLocation>
 		{
 			private string _fileName;
-			private TemplateLocation _fileLocation;
+			private ITemplateLocation _fileLocation;
 
-			internal TemplateFileLocation(string fileName, TemplateLocation location)
+            internal TemplateFileLocation(string fileName, ITemplateLocation location)
 			{
 				_fileName = fileName;
 				_fileLocation = location;
@@ -465,7 +465,7 @@ namespace HotDocs.Sdk
 				get { return _fileName; }
 			}
 
-			internal TemplateLocation FileLocation
+            internal ITemplateLocation FileLocation
 			{
 				get { return _fileLocation; }
 			}
@@ -606,7 +606,7 @@ namespace HotDocs.Sdk
 		/// <param name="location">The location of the template, such as a file system folder, a package file, a database, etc.</param>
 		/// <param name="parseFlags">Specifies settings related to template manifest creation</param>
 		/// <returns>a reference to the newly created <c>TemplateManifest</c></returns>
-		public static TemplateManifest ParseManifest(string fileName, TemplateLocation location, ManifestParseFlags parseFlags)
+        public static TemplateManifest ParseManifest(string fileName, ITemplateLocation location, ManifestParseFlags parseFlags)
 		{
 			TemplateManifest templateManifest = new TemplateManifest();
 			TemplateFileLocation baseTemplateLoc = new TemplateFileLocation(fileName, location);

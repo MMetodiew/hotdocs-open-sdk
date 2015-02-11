@@ -41,7 +41,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="showDownloadLinks">Indicates whether or not links for downloading the assembled document(s) should appear at the end of the interview.</param>
 		/// <returns></returns>
 		public string CreateSession(
-			ITemplate template,
+            ITemplate template,
 			string billingRef = null,
 			string answers = null,
 			string[] markedVariables = null,
@@ -131,7 +131,7 @@ namespace HotDocs.Sdk.Cloud
 
 		#region Private methods
 		private string CreateSessionImpl(
-			ITemplate template,
+            ITemplate template,
 			string billingRef,
 			string answers,
 			string[] markedVariables,

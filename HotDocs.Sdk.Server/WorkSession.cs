@@ -127,7 +127,7 @@ namespace HotDocs.Sdk.Server
         }
 
        
-        protected void InsertNewWorkItems(IEnumerable<IOnDiskTemplate> templates, int parentPosition)
+        protected void InsertNewWorkItems(IEnumerable<ITemplateOnDisk> templates, int parentPosition)
         {
             int insertPosition = parentPosition + 1;
             foreach (var template in templates)

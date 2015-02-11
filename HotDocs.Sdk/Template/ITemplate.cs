@@ -2,11 +2,6 @@ using System.ComponentModel;
 
 namespace HotDocs.Sdk
 {
-    public interface IOnDiskTemplate : ITemplate
-    {
-        string GetFullPath();
-    }
-
     /// <summary>
     /// This  represents a template that is managed by the host application, and
     /// (optionally) some assembly parameters (as specified by switches) for that template.
@@ -14,6 +9,11 @@ namespace HotDocs.Sdk
     /// </summary>
     public interface ITemplate 
     {
+        /// <summary>
+        /// Defines the location of the template.
+        /// </summary>
+        ITemplateLocation Location { get; }
+
         /// <summary>
         /// Returns a locator string to recreate the template object at a later time.
         /// Use the Locate method to recreate the object.
@@ -30,11 +30,6 @@ namespace HotDocs.Sdk
         /// The file name (including extension) of the template. No path information is included.
         /// </summary>
         string FileName { get; }
-
-        /// <summary>
-        /// Defines the location of the template.
-        /// </summary>
-        TemplateLocation Location { get; }
 
         /// <summary>
         /// Command line switches that may be applicable when assembling the template, as provided to the ASSEMBLE instruction.

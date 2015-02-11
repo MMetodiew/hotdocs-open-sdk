@@ -82,7 +82,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="settings">The options to use when assembling the document.</param>
 		/// <param name="billingRef">This parameter lets you specify information that will be included in usage logs for this call. For example, you can use a string to uniquely identify the end user that initiated the request and/or the context in which the call was made. When you review usage logs, you can then see which end users initiated each request. That information could then be used to pass costs on to those end users if desired.</param>
 		/// <returns>An <c>AssemblyResult</c>, which contains the assembled documents, pending assemblies, and unanswered variables from the assembly.</returns>
-		public AssemblyResult AssembleDocument(ITemplate template, string answers=null, AssembleDocumentSettings settings=null, string billingRef=null)
+        public AssemblyResult AssembleDocument(ITemplate template, string answers = null, AssembleDocumentSettings settings = null, string billingRef = null)
 		{
 			return (AssemblyResult)TryWithoutAndWithPackage(
 				uploadPackage => AssembleDocumentImpl(template, answers, settings, billingRef, uploadPackage));
@@ -96,7 +96,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="settings">The settings to use when getting an interview.</param>
 		/// <param name="billingRef">This parameter lets you specify information that will be included in usage logs for this call. For example, you can use a string to uniquely identify the end user that initiated the request and/or the context in which the call was made. When you review usage logs, you can then see which end users initiated each request. That information could then be used to pass costs on to those end users if desired.</param>
 		/// <returns>An <c>BinaryObject</c> array, which contains the HTML fragment and any dialog element images required by the requested interview.</returns>
-		public BinaryObject[] GetInterview(ITemplate template, string answers=null, InterviewSettings settings=null, string billingRef=null)
+        public BinaryObject[] GetInterview(ITemplate template, string answers = null, InterviewSettings settings = null, string billingRef = null)
 		{
 			return (BinaryObject[])TryWithoutAndWithPackage(
 				uploadPackage => GetInterviewImpl(template, answers, settings, billingRef, uploadPackage));
@@ -109,7 +109,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="includeDialogs">This indicates whether or not the returned data should include information about dialogs and their contents.</param>
 		/// <param name="billingRef">This parameter lets you specify information that will be included in usage logs for this call. For example, you can use a string to uniquely identify the end user that initiated the request and/or the context in which the call was made. When you review usage logs, you can then see which end users initiated each request. That information could then be used to pass costs on to those end users if desired.</param>
 		/// <returns>A <c>ComponentInfo</c> object containing information about the requested components.</returns>
-		public ComponentInfo GetComponentInfo(ITemplate template, bool includeDialogs=false, string billingRef=null)
+        public ComponentInfo GetComponentInfo(ITemplate template, bool includeDialogs = false, string billingRef = null)
 		{
 			return (ComponentInfo)TryWithoutAndWithPackage(
 				uploadPackage => GetComponentInfoImpl(template, includeDialogs, billingRef, uploadPackage));
@@ -139,7 +139,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="uploadPackage">Indicates if the package should be uploaded (forcefully) or not. This should only be true if the package does not already exist in the Cloud Services cache.</param>
 		/// <returns></returns>
 		protected internal abstract AssemblyResult AssembleDocumentImpl(
-			ITemplate template,
+            ITemplate template,
 			string answers,
 			AssembleDocumentSettings settings,
 			string billingRef,
@@ -155,7 +155,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="uploadPackage">Indicates if the package should be uploaded (forcefully) or not. This should only be true if the package does not already exist in the Cloud Services cache.</param>
 		/// <returns></returns>
 		protected internal abstract BinaryObject[] GetInterviewImpl(
-			ITemplate template,
+            ITemplate template,
 			string answers,
 			InterviewSettings settings,
 			string billingRef,
@@ -170,7 +170,7 @@ namespace HotDocs.Sdk.Cloud
 		/// <param name="uploadPackage">Indicates if the package should be uploaded (forcefully) or not. This should only be true if the package does not already exist in the Cloud Services cache.</param>
 		/// <returns></returns>
 		protected internal abstract ComponentInfo GetComponentInfoImpl(
-			ITemplate template,
+            ITemplate template,
 			bool includeDialogs,
 			string billingRef,
 			bool uploadPackage);

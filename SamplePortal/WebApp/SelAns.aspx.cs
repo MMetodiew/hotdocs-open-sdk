@@ -121,8 +121,8 @@ public partial class SelAns : System.Web.UI.Page
 	}
 	private void Advance()
 	{
-		HotDocs.Sdk.Server.WorkItem wi = _session.CurrentWorkItem;
-		if (wi is HotDocs.Sdk.Server.InterviewWorkItem)
+		HotDocs.Sdk.Server.DiskAccessibleWorkItem wi = _session.CurrentWorkItem;
+		if (wi is HotDocs.Sdk.Server.DiskAccessibleInterviewWorkItem)
 			Response.Redirect("Interview.aspx");
 		else
 			Response.Redirect("Disposition.aspx");

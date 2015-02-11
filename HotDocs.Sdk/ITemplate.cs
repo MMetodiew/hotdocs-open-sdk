@@ -1,11 +1,18 @@
+using System.ComponentModel;
+
 namespace HotDocs.Sdk
 {
+    public interface IOnDiskTemplate : ITemplate
+    {
+        string GetFullPath();
+    }
+
     /// <summary>
     /// This  represents a template that is managed by the host application, and
     /// (optionally) some assembly parameters (as specified by switches) for that template.
     /// The location of the template is defined by Template.Location.
     /// </summary>
-    public interface ITemplate
+    public interface ITemplate 
     {
         /// <summary>
         /// Returns a locator string to recreate the template object at a later time.
@@ -39,7 +46,7 @@ namespace HotDocs.Sdk
         /// (such as with a DMS) set this key to help HotDocs Server to keep track of which server files are for which template.
         /// If not empty, this key is also used internally by HotDocs Server for caching purposes.
         /// </summary>
-        string Key { get; }
+        string Key { get; set; }
 
         /// <summary>
         /// If the host app wants to know, this property does what's necessary to
@@ -78,12 +85,6 @@ namespace HotDocs.Sdk
         /// </summary>
         /// <remarks>Call this method to request that the file name</remarks>
         void UpdateFileName();
-
-        /// <summary>
-        /// Returns the full path (based on the directory specified by Location.GetTemplateDirectory) of the template.
-        /// </summary>
-        /// <returns></returns>
-        string GetFullPath();
 
         /// <summary>
         /// Returns the assembled document extension associated with the NativeDocumentType property.

@@ -54,6 +54,7 @@
     <Compile Include="AssembleDocumentSettings.cs" />
     <Compile Include="DateValue.cs" />
     <Compile Include="Dependency.cs" />
+    <Compile Include="DiskAccessibleTemplate.cs" />
     <Compile Include="InterviewSettings.cs" />
     <Compile Include="ITemplate.cs" />
     <Compile Include="NamespaceDoc.cs" />

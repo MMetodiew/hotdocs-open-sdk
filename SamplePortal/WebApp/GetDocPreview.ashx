@@ -21,7 +21,7 @@ public class GetDocPreview : IHttpHandler, IRequiresSessionState
 			return;
 
 		// Get the current work item from the session.
-		HotDocs.Sdk.Server.WorkItem workItem = session.CurrentWorkItem;
+		HotDocs.Sdk.Server.DiskAccessibleWorkItem workItem = session.CurrentWorkItem;
 		if (workItem == null)
 			return;
 

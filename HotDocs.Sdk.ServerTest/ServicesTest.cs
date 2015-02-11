@@ -130,7 +130,7 @@ namespace HotDocs.Sdk.ServerTest
 			GetInterview(svc, logRef);
 		}
 
-		private void GetInterview(IServices svc, string logRef)
+		private void GetInterview(IServiceUsingTemplatesAnywhere svc, string logRef)
 		{
 			// Set up the InterviewOptions for the test.
 			ITemplate tmp = Util.OpenTemplate("d1f7cade-cb74-4457-a9a0-27d94f5c2d5b");
@@ -259,9 +259,9 @@ namespace HotDocs.Sdk.ServerTest
 
 			// Pass a null for settings, answers, and logRef to ensure that defaults are used.
 			result = svc.AssembleDocument(tmp, null, null, null);
-			Assert.AreEqual(result.PendingAssembliesCount, 0);
+			Assert.AreEqual(result.OnDiskAssembleDocumentResult.PendingAssembliesCount, 0);
 			Assert.AreEqual(0, result.Document.SupportingFiles.Count<NamedStream>());
-			Assert.AreEqual(0, result.PendingAssembliesCount); ;
+			Assert.AreEqual(0, result.OnDiskAssembleDocumentResult.PendingAssembliesCount); ;
 
 			settings.Format = DocumentType.MHTML;
 			result = svc.AssembleDocument(tmp, answers, settings, logRef);
@@ -283,7 +283,7 @@ namespace HotDocs.Sdk.ServerTest
 			// Now try with another template, which contains an ASSEMBLE instruction.
 			tmp = Util.OpenTemplate("TemplateWithAssemble");
 			result = svc.AssembleDocument(tmp, null, null, logRef);
-			Assert.AreEqual(1, result.PendingAssembliesCount);
+			Assert.AreEqual(1, result.OnDiskAssembleDocumentResult.PendingAssembliesCount);
 		}
 
 		#endregion

@@ -19,7 +19,7 @@ namespace HotDocs.Sdk.Server.WebService
 	/// This <c>Services</c> class is an implementation of the IServices interface that uses HTTP or HTTPS web services calls to connect
 	/// to HotDocs Server for each of the IServices interface methods.
 	/// </summary>
-	public class Services : IServices
+	public class Services : IServicesUsingTemplatesOnDisk
 	{
 		private string _endPointName;
 		private Binding _endPointBinding;
@@ -76,7 +76,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// <param name="markedVariables">A collection of variables that should be marked with special formatting in the interview.</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>An object which contains an HTML fragment to be inserted in a web page to display the interview.</returns>
-		public InterviewResult GetInterview(ITemplate template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
+		public InterviewResult GetInterview(IOnDiskTemplate template, TextReader answers, InterviewSettings settings, IEnumerable<string> markedVariables, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -143,7 +143,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// These settings include the assembled document format (file extension), markup syntax, how to display fields with unanswered variables, etc</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>returns information about the assembled document, the document type, the unanswered variables, the resulting answers, etc.</returns>
-		public AssembleDocumentResult AssembleDocument(ITemplate template, TextReader answers, AssembleDocumentSettings settings, string logRef)
+        public OnDiskAssembleDocumentResult AssembleDocument(IOnDiskTemplate template, TextReader answers, AssembleDocumentSettings settings, string logRef)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			string logStr = logRef == null ? string.Empty : logRef;
@@ -154,7 +154,7 @@ namespace HotDocs.Sdk.Server.WebService
 			if (settings == null)
 				settings = new AssembleDocumentSettings();
 
-			AssembleDocumentResult result = null;
+			OnDiskAssembleDocumentResult result = null;
 			AssemblyResult asmResult = null;
 
 			using (Proxy client = GetProxy())
@@ -191,7 +191,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// <param name="includeDialogs">Whether to include dialog and mapping information in the returned results.</param>
 		/// <param name="logRef">A string to display in logs related to this request.</param>
 		/// <returns>returns the list of variables and dialogs (if includeDialogs is true) associated with the <c>template</c> parameter</returns>
-		public ComponentInfo GetComponentInfo(ITemplate template, bool includeDialogs, string logRef)
+		public ComponentInfo GetComponentInfo(IOnDiskTemplate template, bool includeDialogs, string logRef)
 		{
 			string logStr = logRef == null ? string.Empty : logRef;
 			if (template == null)
@@ -241,7 +241,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// Silverlight DLLs will be generated</param>
 		/// <param name="flags">A set of flags to control whether javascript or SilverLight files will be generated, 
 		/// as well as whether to build files for templates included with an assemble instruction.</param>
-		public void BuildSupportFiles(ITemplate template, HDSupportFilesBuildFlags flags)
+		public void BuildSupportFiles(IOnDiskTemplate template, HDSupportFilesBuildFlags flags)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"WebService.Services.BuildSupportFiles: The ""template"" parameter passed in was null.");
@@ -260,7 +260,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// </summary>
 		/// <param name="template">An instance of the Template class, for which the supporting javascript files and 
 		/// Silverlight DLLs will be removed</param>
-		public void RemoveSupportFiles(ITemplate template)
+		public void RemoveSupportFiles(IOnDiskTemplate template)
 		{
 			if (template == null)
 				throw new ArgumentNullException("template", @"WebService.Services.RemoveSupportFiles: The ""template"" parameter passed in was null.");
@@ -285,7 +285,7 @@ namespace HotDocs.Sdk.Server.WebService
 		/// <param name="fileType">The type of file being requested: img (image file), js (JavaScript interview definition), 
 		/// or dll (Silverlight interview definition).</param>
 		/// <returns>A stream containing the requested interview file, to be returned to the caller.</returns>
-		public Stream GetInterviewFile(ITemplate template, string fileName, string fileType)
+		public Stream GetInterviewFile(IOnDiskTemplate template, string fileName, string fileType)
 		{
 			// Validate input parameters, creating defaults as appropriate.
 			if (template == null)

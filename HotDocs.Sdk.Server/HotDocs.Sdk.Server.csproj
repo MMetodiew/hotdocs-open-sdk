@@ -55,7 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cloud\Cloud.Services.cs" />
+    <Compile Include="DiskAccessibleWorkSession.cs" />
     <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="OffDiskAssembleDocumentResult.cs" />
+    <Compile Include="OnDiskAssembleDocumentResult.cs" />
     <Compile Include="WebService\WebService.Services.cs" />
     <Compile Include="WorkSession.cs" />
     <Compile Include="AssembleDocumentResult.cs" />

@@ -34,11 +34,11 @@ namespace HotDocs.SdkTest
 			string packageID = "d1f7cade-cb74-4457-a9a0-27d94f5c2d5b";
 			string templateFileName = "Demo Employment Agreement.docx";
 			HotDocs.Sdk.PackagePathTemplateLocation location = CreatePackagePathLocation(packageID);
-			ITemplate template;
+			DiskAccessibleTemplate template;
 			Assert.IsTrue(File.Exists(location.PackagePath));
 
 			// Verify that null switches and key are resolved to empty strings.
-			template = new Template(location, null, null);
+            template = new DiskAccessibleTemplate(location, null, null);
 			Assert.AreEqual("", template.Switches);
 			Assert.AreEqual("", template.Key);
 			Assert.IsTrue(template.HasInterview);
@@ -47,7 +47,7 @@ namespace HotDocs.SdkTest
 
 			string switches = "/ni";
 			string key = "Test file key";
-			template = new Template(location, switches, key);
+            template = new DiskAccessibleTemplate(location, switches, key);
 
 			Assert.AreEqual(templateFileName, template.FileName);
 			Assert.AreEqual(key, template.Key);
@@ -81,12 +81,12 @@ namespace HotDocs.SdkTest
 			string templateDir = Path.Combine(GetSamplePortalTemplateDir(), "TestTemplates");
 			Assert.IsTrue(Directory.Exists(templateDir));
 			PathTemplateLocation location = new PathTemplateLocation(templateDir);
-			ITemplate template;
+			IOnDiskTemplate template;
 
 			// Make sure that null fileName causes exception.
 			try
 			{
-				template = new Template(null, location, null, null);
+                template = new DiskAccessibleTemplate(null, location, null, null);
 				Assert.Fail();
 			}
 			catch (Exception ex)
@@ -97,7 +97,7 @@ namespace HotDocs.SdkTest
 			// Make sure that null location causes exception.
 			try
 			{
-				template = new Template("filename.docx", null, null, null);
+                template = new DiskAccessibleTemplate("filename.docx", null, null, null);
 				Assert.Fail();
 			}
 			catch (Exception ex)
@@ -108,7 +108,7 @@ namespace HotDocs.SdkTest
 			// Make sure that a null location causes exception.
 			try
 			{
-				template = new Template(null, null, null);
+                template = new DiskAccessibleTemplate(null, null, null);
 				Assert.Fail();
 			}
 			catch (Exception ex)
@@ -119,7 +119,7 @@ namespace HotDocs.SdkTest
 			// Try to locate a template with a null locator.
 			try
 			{
-				template = Template.Locate(null);
+                template = DiskAccessibleTemplate.Locate(null);
 				Assert.Fail();
 			}
 			catch (ArgumentNullException ex)
@@ -130,7 +130,7 @@ namespace HotDocs.SdkTest
 			// Try to locate a template with an empty string locator.
 			try
 			{
-				template = Template.Locate("");
+                template = DiskAccessibleTemplate.Locate("");
 				Assert.Fail();
 			}
 			catch (ArgumentNullException ex)
@@ -141,7 +141,7 @@ namespace HotDocs.SdkTest
 			// Try to locate a template with an invalid template locator.
 			try
 			{
-				template = Template.Locate(Util.EncryptString("abcdefg")); 
+                template = DiskAccessibleTemplate.Locate(Util.EncryptString("abcdefg")); 
 				Assert.Fail();
 			}
 			catch (Exception ex)
@@ -160,12 +160,12 @@ namespace HotDocs.SdkTest
 			}
 
 			// Try to get the TemplateType for an unknown template type.
-			template = new Template("filename.tfx", location, null, null);
+            template = new DiskAccessibleTemplate("filename.tfx", location, null, null);
 			Assert.AreEqual(TemplateType.Unknown, template.TemplateType);
 			Assert.AreEqual("", template.Title);
 
 			// Verify that null switches and key resolve to empty string.
-			template = new Template("Demo Employment Agreement.docx", location, null, null);
+            template = new DiskAccessibleTemplate("Demo Employment Agreement.docx", location, null, null);
 			Assert.AreEqual("", template.Switches);
 			Assert.AreEqual("", template.Key);
 
@@ -228,7 +228,7 @@ namespace HotDocs.SdkTest
 
 			foreach (var t in testTemplates)
 			{
-				template = new Template(t.Key, location, switches, key);
+                template = new DiskAccessibleTemplate(t.Key, location, switches, key);
 				Assert.AreEqual(template.Title, t.Value.Title);
 				string filePath = template.GetFullPath();
 				Assert.IsTrue(File.Exists(filePath));

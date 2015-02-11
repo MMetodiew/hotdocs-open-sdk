@@ -65,11 +65,11 @@ public partial class Disposition : System.Web.UI.Page
 				foreach (HotDocs.Sdk.Server.Document doc in docs)
 					cache.AddDoc(doc);
 
-				IEnumerable<HotDocs.Sdk.Server.WorkItem> interviewItems = from n in _session.WorkItems where n is HotDocs.Sdk.Server.InterviewWorkItem select n;
+				IEnumerable<HotDocs.Sdk.Server.DiskAccessibleWorkItem> interviewItems = from n in _session.WorkItems where n is HotDocs.Sdk.Server.DiskAccessibleInterviewWorkItem select n;
 				int numberOfInterviews = interviewItems.Count();
 				if (numberOfInterviews > 1)
 				{
-					IEnumerable<HotDocs.Sdk.Server.WorkItem> completeItems = from n in interviewItems where n.IsCompleted select n;
+					IEnumerable<HotDocs.Sdk.Server.DiskAccessibleWorkItem> completeItems = from n in interviewItems where n.IsCompleted select n;
 					int completedInterviews = completeItems.Count();
 					pnlNextAsm.Visible = true;
 					if (completedInterviews < numberOfInterviews)

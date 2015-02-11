@@ -24,8 +24,8 @@ public partial class Interview : System.Web.UI.Page
 		if (_session == null)
 			Response.Redirect("Default.aspx");
 
-		HotDocs.Sdk.Server.WorkItem workItem = _session.CurrentWorkItem;
-		if (!(workItem is HotDocs.Sdk.Server.InterviewWorkItem))
+		HotDocs.Sdk.Server.DiskAccessibleWorkItem workItem = _session.CurrentWorkItem;
+		if (!(workItem is HotDocs.Sdk.Server.DiskAccessibleInterviewWorkItem))
 		{
 			MessageBox.Show("Only interview work items are allowed at the interview page.");
 			return;

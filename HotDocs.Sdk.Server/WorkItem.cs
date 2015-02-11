@@ -13,13 +13,13 @@ namespace HotDocs.Sdk.Server
 	/// WorkItem is an abstract class representing either a browser interview OR an assembled document.
 	/// Work Sessions (also known as assembly queues) in the Open SDK are composed of one or more WorkItems.
 	/// </summary>
-	public abstract class WorkItem
+	public abstract class DiskAccessibleWorkItem
 	{
 		/// <summary>
 		/// The WorkItem constructor is protected; it is only called from derived WorkItem classes.
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		protected WorkItem(ITemplate template)
+		protected DiskAccessibleWorkItem(IOnDiskTemplate template)
 		{
 			Template = template;
 		}
@@ -49,7 +49,7 @@ namespace HotDocs.Sdk.Server
 		/// interview.  For document work items, this is the template that generates the document.  A single template can
 		/// be (and often is) associated with both an interview work item and a document work item.
 		/// </summary>
-		public ITemplate Template { get; private set; }
+		public IOnDiskTemplate Template { get; private set; }
 
 		/// <summary>
 		/// A flag indicating whether this work item has been completed or not.  This property is only set by the WorkSession
@@ -71,14 +71,14 @@ namespace HotDocs.Sdk.Server
 	/// and another to "finish" the interview once answers have been posted back from the browser.
 	/// </summary>
 	[Serializable]
-	public class InterviewWorkItem : WorkItem
+	public class DiskAccessibleInterviewWorkItem : DiskAccessibleWorkItem
 	{
 		/// <summary>
 		/// The constructor is internal; it is only called from the WorkSession class.  The WorkSession
 		/// is in charge of adding work items to itself.
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		internal InterviewWorkItem(ITemplate template)
+		internal DiskAccessibleInterviewWorkItem(IOnDiskTemplate template)
 			: base(template)
 		{
 		}
@@ -120,14 +120,14 @@ namespace HotDocs.Sdk.Server
 	/// it also tracks the unanswered variables encountered during assembly.
 	/// </summary>
 	[Serializable]
-	public class DocumentWorkItem : WorkItem // internally the DocumentWorkItem keeps track of where, in temporary storage, its assembled document is stored
+	public class DiskAccessibleDocumentWorkItem : DiskAccessibleWorkItem // internally the DocumentWorkItem keeps track of where, in temporary storage, its assembled document is stored
 	{
 		/// <summary>
 		/// The constructor is internal; it is only called from the WorkSession class (and maybe the InterviewWorkItem class).
 		/// </summary>
 		/// <param name="template">The template upon which the work item is based.</param>
-		internal DocumentWorkItem(ITemplate template) : this(template, new string[0]) { }
-		internal DocumentWorkItem(ITemplate template, string[] unansweredVariables)
+		internal DiskAccessibleDocumentWorkItem(IOnDiskTemplate template) : this(template, new string[0]) { }
+        internal DiskAccessibleDocumentWorkItem(IOnDiskTemplate template, string[] unansweredVariables)
 			: base(template)
 		{
 			UnansweredVariables = unansweredVariables;
